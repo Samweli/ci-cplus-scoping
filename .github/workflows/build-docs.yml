@@ -19,6 +19,11 @@ jobs:
         with:
           python-version: '3.10'
 
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v22
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Checkout code
         uses: actions/checkout@v2
         with:
@@ -37,5 +42,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global --add safe.directory /__w/cplus-plugin/cplus-plugin
           cd docs
-          pwd
-          PYTHONPATH=docs mkdocs gh-deploy --force
+          nix-shell
+          ./create-mkdocs-html-config.sh
+          ./build-docs-html.sh
+          mkdocs gh-deploy --force
