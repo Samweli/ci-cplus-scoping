@@ -29,7 +29,7 @@ jobs:
         run: apt-get install python-is-python3
 
       - name: Install plugin development dependencies
-        run: pip install -r docs/requirements-dev.txt
+        run: pip install -r requirements-dev.txt
 
       - name: Update the documentation
         run: |
