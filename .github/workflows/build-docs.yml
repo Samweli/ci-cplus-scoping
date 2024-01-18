@@ -37,7 +37,8 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global --add safe.directory /__w/cplus-plugin/cplus-plugin
           cd docs
-          sh <(curl -L https://nixos.org/nix/install) --no-daemon
+          curl https://releases.nixos.org/nix/nix-2.19.2/install -o install_nix.sh
+          sh install_nix.sh --no-daemon
           nix-shell
           ./create-mkdocs-html-config.sh
           ./build-docs-html.sh
