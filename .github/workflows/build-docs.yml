@@ -36,7 +36,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global --add safe.directory /__w/cplus-plugin/cplus-plugin
-          ls src/cplus_plugin
-          ls .
-          pwd
-          PYTHONPATH=docs mkdocs gh-deploy --force
+          cd docs
+          PYTHONPATH=src mkdocs gh-deploy --force
