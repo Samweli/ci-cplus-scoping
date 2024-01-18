@@ -19,11 +19,6 @@ jobs:
         with:
           python-version: '3.10'
 
-      - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v22
-        with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Checkout code
         uses: actions/checkout@v2
         with:
@@ -34,7 +29,7 @@ jobs:
         run: apt-get install python-is-python3
 
       - name: Install plugin development dependencies
-        run: pip install -r requirements-dev.txt
+        run: pip install -r docs/requirements-dev.txt
 
       - name: Update the documentation
         run: |
@@ -42,6 +37,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global --add safe.directory /__w/cplus-plugin/cplus-plugin
           cd docs
+          sh <(curl -L https://nixos.org/nix/install) --no-daemon
           nix-shell
           ./create-mkdocs-html-config.sh
           ./build-docs-html.sh
